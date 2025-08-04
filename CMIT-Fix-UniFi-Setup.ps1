@@ -1,3 +1,12 @@
+<#
+CMIT-Fix-UniFi-Inform.ps1
+pellis@cmitsolutions.com
+2025-08-01-001
+
+Latest Notes: Setup script to get host key into local cache
+
+Using RMM, MDM or other means to deliver and run this on a machine in the LAN of the device you are wanting to fix.
+#>
 # === CONFIGURATION ===
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $paramFile = Join-Path $scriptDir "deviceParams.json"
@@ -10,7 +19,7 @@ if (-Not (Test-Path $paramFile)) {
     Write-Error "Parameter file not found: $paramFile"
     exit
 }
-$params = Get-Content $paramFile | ConvertFrom-Json
+$params = Get-Content $paramFile -Raw | Out-String | ConvertFrom-Json
 $username = $params.username
 $password = $params.password
 $ips = $params.ips
@@ -34,4 +43,4 @@ foreach ($ip in $ips) {
     }
 }
 
-Write-Host "`n✅ Host key caching complete. You can now run your main script in batch mode."
+Write-Host "`n Host key caching complete. You can now run your main script in batch mode."

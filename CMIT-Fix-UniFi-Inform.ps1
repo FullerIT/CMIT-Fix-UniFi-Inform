@@ -21,7 +21,7 @@ if (-Not (Test-Path $paramFile)) {
     Write-Error "Parameter file not found: $paramFile"
     exit
 }
-$params = Get-Content $paramFile | ConvertFrom-Json
+$params = Get-Content $paramFile -Raw | Out-String | ConvertFrom-Json
 $username = $params.username
 $password = $params.password
 $ips = $params.ips
