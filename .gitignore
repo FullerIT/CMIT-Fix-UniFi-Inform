@@ -12,6 +12,7 @@ Releases/
 *.cert
 *.xml
 *.json
+plink.exe
 
 # Windows image file caches
 Thumbs.db
